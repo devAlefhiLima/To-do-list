@@ -75,3 +75,8 @@ img {
 .task:hover img {
     opacity: 1;
 }
+
+.done {
+    background-color: #2A8271;
+    text-decoration: line-through;
+}
