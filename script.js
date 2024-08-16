@@ -7,7 +7,10 @@ let minhaListaDeItens = []
 
 
 function adicionarNovaTarefa() {
-    minhaListaDeItens.push(input.value)
+    minhaListaDeItens.push({
+        tarefa: input.value,
+        concluida: false
+    })
 
     input.value = ""
 
@@ -17,11 +20,11 @@ function adicionarNovaTarefa() {
 function mostrarTarefas() {
     let novaLi = ""
 
-    minhaListaDeItens.forEach((tarefa, index) => {
+    minhaListaDeItens.forEach((item, index) => {
         novaLi = novaLi + `
-            <li class="task">
-            <img src="./img/checked.png" alt="Check na tarefa">
-            <p>${tarefa}</p>
+            <li class="task ${item.concluida && "done"}">
+            <img src="./img/checked.png" alt="Check na tarefa" onclick="concluirTarefa(${index})">
+            <p>${item.tarefa}</p>
             <img src="./img/trash.png" alt="tarefa para o lixo" onclick="deletarItem(${index})">
             </li>
         `
@@ -29,6 +32,12 @@ function mostrarTarefas() {
 
     listaCompleta.innerHTML = novaLi
 
+}
+
+function concluirTarefa(index) {
+    minhaListaDeItens[index].concluida = !minhaListaDeItens[index].concluida
+
+    mostrarTarefas()
 }
 
 function deletarItem(index) {
